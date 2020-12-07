@@ -1,25 +1,22 @@
-// import { refs } from '../refs/refs.js';
-
 export class CountdownTimer {
   constructor({ selector, targetDate }) {
     this.selector = selector;
     this.targetDate = targetDate;
-    this.start();
     this.timer = document.querySelector(this.selector);
     this.days = this.timer.querySelector('[data-value="days"]');
     this.hours = this.timer.querySelector('[data-value="hours"]');
     this.mins = this.timer.querySelector('[data-value="mins"]');
     this.secs = this.timer.querySelector('[data-value="secs"]');
+    this.start();
   }
 
   start() {
     const targetTime = this.targetDate;
-    // const targetTime = new Date(2020, 11, 10, 2, 0, 0);
     setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = targetTime - currentTime;
       this.updateTimer(this.getTime(deltaTime));
-    }, 1000);    
+    }, 1000);
   }
   pad(value) {
     return String(value).padStart(2, '0');
@@ -34,16 +31,9 @@ export class CountdownTimer {
     return { days, hours, mins, secs };
   }
   updateTimer({ days, hours, mins, secs }) {
-    console.log(`${days}:${hours}:${mins}:${secs}`);
-
-    // const daysRef = timerRef.querySelector("[(data - value = 'days')]");
-    this.days.textContent = `${days}`;
-    this.hours.textContent = `${hours}`;
-    this.mins.textContent = `${mins}`;
-    this.secs.textContent = `${secs}`;
+    this.days.textContent = days;
+    this.hours.textContent = hours;
+    this.mins.textContent = mins;
+    this.secs.textContent = secs;
   }
 }
-const cyberpunkTimer = new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date(2020, 11, 10, 2, 0, 0),
-});
